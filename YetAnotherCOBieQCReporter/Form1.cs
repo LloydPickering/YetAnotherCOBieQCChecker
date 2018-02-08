@@ -12,9 +12,41 @@ namespace YetAnotherCOBieQCReporter
 {
     public partial class Form1 : Form
     {
+        
+        OpenFileDialog fileBrowse = new OpenFileDialog();
+        SaveFileDialog saveBrowse = new SaveFileDialog();
+
         public Form1()
         {
             InitializeComponent();
+        }
+        private void inputFileBrowse_Click(object sender, EventArgs e)
+        {
+            fileBrowse.FileName = inputLocation.Text;
+            fileBrowse.Filter = "Excel 2007+|*.xlsx|SpreadsheetML|*.xls";
+            fileBrowse.CheckFileExists = true;
+            if (fileBrowse.ShowDialog() == DialogResult.OK)
+            {
+                inputLocation.Text = fileBrowse.FileName;
+            }
+        }
+
+        private void outputFileBrowse_Click(object sender, EventArgs e)
+        {
+            saveBrowse.FileName = outputLocation.Text;
+            saveBrowse.Filter = "html|*.html";
+            saveBrowse.CheckFileExists = false;
+            if (saveBrowse.ShowDialog() == DialogResult.OK)
+            {
+                outputLocation.Text = saveBrowse.FileName;
+            }
+        }
+
+        private void Generate_Click(object sender, EventArgs e)
+        {
+            var cobie = inputLocation.Text;
+            var output = outputLocation.Text;
+            var isDesign = design.Checked;
         }
     }
 }
