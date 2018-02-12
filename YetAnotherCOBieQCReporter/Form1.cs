@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,7 +35,7 @@ namespace YetAnotherCOBieQCReporter
         private void outputFileBrowse_Click(object sender, EventArgs e)
         {
             saveBrowse.FileName = outputLocation.Text;
-            saveBrowse.Filter = "html|*.html";
+            saveBrowse.Filter = "text|*.txt";
             saveBrowse.CheckFileExists = false;
             if (saveBrowse.ShowDialog() == DialogResult.OK)
             {
@@ -46,7 +47,16 @@ namespace YetAnotherCOBieQCReporter
         {
             var cobie = inputLocation.Text;
             var output = outputLocation.Text;
-            var isDesign = design.Checked;
+            //var isDesign = design.Checked;
+
+            var succeeded = Processor.ProcessFromExcel(cobie, output);
+            if (succeeded)
+            {
+                MessageBox.Show("Processing succeeded");
+            } else { 
+                MessageBox.Show("Failed to process");
+            }
+            
         }
     }
 }

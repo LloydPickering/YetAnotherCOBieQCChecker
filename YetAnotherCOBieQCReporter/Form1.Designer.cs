@@ -66,6 +66,7 @@
             this.groupBox1.TabIndex = 21;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "What Stage are you checking against?";
+            this.groupBox1.Visible = false;
             // 
             // construction
             // 
